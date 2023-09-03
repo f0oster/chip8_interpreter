@@ -1,0 +1,10 @@
+build/
+.DS_Store
+*.cmake
+*.o
+*.out
+*.exe
+*.com
+*.elf
+*.uf2
+.cache/
