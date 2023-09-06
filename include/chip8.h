@@ -40,7 +40,7 @@ typedef struct CHIP8 {
 
 // init
 CHIP8* init_chip8();
-
+void init_font(CHIP8 *chip8);
 int load_rom(CHIP8 *chip8);
 
 void set_register(CHIP8 *chip8, uint8_t registeridx, uint8_t value);

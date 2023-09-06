@@ -130,7 +130,17 @@ void instr_8xy1(CHIP8 *chip8, uint16_t opcode) {
 }
 
 void instr_8xy2(CHIP8 *chip8, uint16_t opcode) {
-    printf("executing instruction for \r\n");
+    printf("executing instruction for 8xy2: AND Vx, Vy \r\n");
+    uint8_t regxidx = (opcode & 0x0F00) >> 8;
+    uint8_t regyidx = (opcode & 0x00F0) >> 4;
+    uint16_t regx_value = get_register(chip8, regxidx);
+    uint16_t regy_value = get_register(chip8, regyidx);
+    uint16_t band_value = (regx_value & regy_value);
+    printf("BOR %d, | %d = %d, storing in V%d\r\n", regx_value, regy_value,
+           band_value, regxidx);
+    set_register(chip8, regxidx, band_value);
+
+
 }
 
 void instr_8xy3(CHIP8 *chip8, uint16_t opcode) {
