@@ -24,7 +24,7 @@ typedef struct CHIP8 {
 
     uint8_t memory[MEMORY_SIZE];
 
-    uint8_t display[SCREEN_WIDTH][SCREEN_HEIGHT];
+    uint8_t display[SCREEN_HEIGHT][SCREEN_WIDTH];
 
     uint16_t i; // address register
     uint8_t v[REGISTER_COUNT]; // data registers

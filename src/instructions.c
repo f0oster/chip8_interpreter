@@ -36,7 +36,6 @@ void init_instruction_tables(CHIP8 *chip8) {
 void instr_00EE(CHIP8 *chip8, uint16_t opcode) {
     printf("executing instruction for 00EE: RET sub\r\n");
     pop_stack(chip8);
-    chip8->pc--;
 }
 
 void instr_1NNN(CHIP8 *chip8, uint16_t opcode ) {
@@ -183,12 +182,13 @@ void instr_dxyn(CHIP8 *chip8, uint16_t opcode) {
     uint8_t starting_x_pos = get_register(chip8, reg_x_idx) % SCREEN_WIDTH;
     uint8_t starting_y_pos  = get_register(chip8, reg_y_idx) % SCREEN_HEIGHT;
 
-    uint16_t sprite_address = chip8->i;
+    uint16_t sprite_address = (chip8->i & 0x0FFF);
 
-    uint8_t num_rows = (opcode & 0x00F);
+    uint8_t num_rows = (opcode & 0x000F);
 
     set_register(chip8, 0xF, 0);
 
+    printf("The address register address is: %0x\r\n", sprite_address);
     uint8_t *sprite_data = &chip8->memory[sprite_address];
     for (int row = 0; row < num_rows; row++) {
         printf("Sprite byte for row %d is: %d\r\n",row, sprite_data[row]);

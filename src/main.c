@@ -63,7 +63,7 @@ int main() {
             case INIT:
                 printf("Initialising...\r\n");
                 chip8 = init_chip8();
-                sdl_state = init_sdl("Chip8", 64*10, 32*10);
+                sdl_state = init_sdl("Chip8", SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
                 if (chip8 != NULL && sdl_state != NULL) {
                     printf("Loading ROM into memory...\r\n");
                     load_rom(chip8);
@@ -79,7 +79,7 @@ int main() {
                 current_state = sdl_handle_event(&e);
                 emulate_cycle(chip8);
                 render(sdl_state, chip8);
-                SDL_Delay(100);
+                SDL_Delay(300);
                 break;
 
              case PAUSED:
