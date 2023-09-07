@@ -3,7 +3,7 @@
 #include <string.h>
 
 CHIP8* init_chip8() {
-    CHIP8 *chip8 = malloc(sizeof(CHIP8));
+    CHIP8 *chip8 = calloc(1, sizeof(CHIP8));
     chip8->pc = ROM_MEMORY_REGION_START;
     chip8->sp = 0;
     init_font(chip8);
@@ -37,7 +37,7 @@ void init_font(CHIP8 *chip8) {
 }
 
 int load_rom(CHIP8 *chip8) {
-    FILE *rom = fopen("../c8roms/UFO", "rb");
+    FILE *rom = fopen("../c8roms/IBMLogo.ch8", "rb");
     if (rom == NULL) {
         printf("ROM could not be loaded...");
         return -1;

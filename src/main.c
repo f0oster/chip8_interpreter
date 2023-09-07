@@ -6,10 +6,21 @@
 #include "../include/chip8.h"
 #include "../include/SDLHandler.h"
 
-void render(SDL_State *sdl_state) {
-    SDL_SetRenderDrawColor(sdl_state->renderer, 200, 0, 0, 255);
+void render(SDL_State *sdl_state, CHIP8 *chip8) {
+
+    SDL_SetRenderDrawColor(sdl_state->renderer, 0, 0, 0, 255);
     SDL_RenderClear(sdl_state->renderer);
 
+    SDL_SetRenderDrawColor(sdl_state->renderer, 255, 0, 0, 255);
+    for (int row = 0; row < SCREEN_HEIGHT; row++) {
+       for (int col = 0; col < SCREEN_WIDTH; col++) {
+           if (chip8->display[row][col] == 1) {
+
+           SDL_Rect fillRect = {col * 10, row * 10, 10, 10 };
+           SDL_RenderFillRect(sdl_state->renderer, &fillRect);
+       }
+       }
+    }
     SDL_RenderPresent(sdl_state->renderer);
 }
 
@@ -32,6 +43,10 @@ void clean_up(CHIP8 *chip8, SDL_State *sdl_state) {
     free(chip8);
 }
 
+void update(CHIP8 *chip8, SDL_State *sdl_state) {
+
+}
+
 int main() {
 
     CHIP8 *chip8;
@@ -48,7 +63,7 @@ int main() {
             case INIT:
                 printf("Initialising...\r\n");
                 chip8 = init_chip8();
-                sdl_state = init_sdl("Chip8", 64, 32);
+                sdl_state = init_sdl("Chip8", 64*10, 32*10);
                 if (chip8 != NULL && sdl_state != NULL) {
                     printf("Loading ROM into memory...\r\n");
                     load_rom(chip8);
@@ -63,8 +78,8 @@ int main() {
             case RUNNING:
                 current_state = sdl_handle_event(&e);
                 emulate_cycle(chip8);
-                render(sdl_state);
-                SDL_Delay(1000);
+                render(sdl_state, chip8);
+                SDL_Delay(100);
                 break;
 
              case PAUSED:

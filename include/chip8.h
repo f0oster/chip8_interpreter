@@ -9,6 +9,8 @@
 #define OPCODE_SIZE 2
 #define STACK_SIZE 16
 #define REGISTER_COUNT 16
+#define SCREEN_WIDTH 64
+#define SCREEN_HEIGHT 32
 
 struct CHIP8;
 
@@ -21,6 +23,8 @@ typedef struct CHIP8 {
     uint16_t pc;
 
     uint8_t memory[MEMORY_SIZE];
+
+    uint8_t display[SCREEN_WIDTH][SCREEN_HEIGHT];
 
     uint16_t i; // address register
     uint8_t v[REGISTER_COUNT]; // data registers

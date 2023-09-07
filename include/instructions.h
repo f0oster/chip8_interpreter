@@ -23,7 +23,7 @@ void instr_8xy6(CHIP8 *chip8, uint16_t opcode);
 void instr_8xy7(CHIP8 *chip8, uint16_t opcode);
 void instr_8xyE(CHIP8 *chip8, uint16_t opcode);
 void instr_aNNN(CHIP8 *chip8, uint16_t opcode);
-
+void instr_dxyn(CHIP8 *chip8, uint16_t opcode);
 
 
 #endif
